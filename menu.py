@@ -14,7 +14,7 @@ for f in files:
     increment += 1
 print("Madus' Cryptographic Analyzer V0.01")
 state = 0
-
+#main state
 while state == 0:
     data = input('')
     
@@ -28,20 +28,66 @@ while state == 0:
         newinc = 0
         for f in files:
             print('[' + str(newinc) + '] ' + vars()["newadd" + str(newinc)])
-
-
+    else:
+        continue
+    #data setup state
     while state == 1:
         data = input(str(vars()["newadd" + str(datachose)] + ":"))
         if data == "main":
             state = 0
         if data == "help":
             print("'main' return to main menu")
-            print("'matX,Y' to display the string data as a matrix X by Y in size")    
-
+            print("'matX,Y' to display the string data as a matrix X by Y in size")
+            print("'string' display the data in string format")
+        if data[0] == "a" and data[1] == "r" and data[2] == "r":
+            dataup = data.split('r')
+            cript_arr = modules.arraydefiner.array_from_text_string(cripto,dataup[2])
+            print(cript_arr)
+            state = 4
+        if data[0] == 's' and data[1] == 't' and data[2] == 'r' and data[3] == 'i' and data[4] == 'n' and data[5] == 'g':
+            print(cripto)
+            state = 3
         if data[0] == 'm' and data[1] == 'a' and data[2] == 't':
             foo  = data.split('t')
             baa = foo[1].split(',')
+            global cript_mat
             cript_mat = modules.arraydefiner.matrix_from_text_string(cripto,baa[0],baa[1])
             for var in cript_mat:
                 print(var)
-            
+            state = 2
+        
+            #matrix editing state
+            while state == 2:
+                data = input(str(vars()["newadd" + str(datachose)] + "/" + "matrix:"))
+                #matrix for preservation
+                master_mat = cript_mat
+                #matrix for editing
+                edit_mat = cript_mat
+                if data == "back":
+                    state = 1
+                if data == "main":
+                      state = 0
+
+                #reset matrix to original state
+                if data == "undoall":
+                    edit_mat = master_mat
+                    print(edit_mat)
+        else:
+            continue
+        #string analysis state
+        while state == 3:
+            data = input(str(vars()["newadd" + str(datachose)] + "/" + "string:"))
+            if data == "back":
+                 state = 1
+            if data == "main":
+                 state = 0
+            else:
+                continue
+        while state == 4:
+            data = data = input(str(vars()["newadd" + str(datachose)] + "/" + "array:"))
+            if data == "back":
+                state = 1
+            if data == "main":
+                state = 0
+            else:
+                continue

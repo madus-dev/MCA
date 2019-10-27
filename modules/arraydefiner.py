@@ -13,3 +13,10 @@ def matrix_from_text_string(cript,x,y):
         cript_mat[mat_zero] = vars()["criptl" + str(mat_zero)]
         mat_zero += 1
     return (cript_mat)
+
+def array_from_text_string(cript,num):
+    array = [0] * int(num)
+    for x in range(0,int(num)):
+        array[x] = cript[x]
+
+    return(array)
