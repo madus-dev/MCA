@@ -28,8 +28,7 @@ while state == 0:
         newinc = 0
         for f in files:
             print('[' + str(newinc) + '] ' + vars()["newadd" + str(newinc)])
-    else:
-        continue
+
     #data setup state
     while state == 1:
         data = input(str(vars()["newadd" + str(datachose)] + ":"))
@@ -57,37 +56,62 @@ while state == 0:
             state = 2
         
             #matrix editing state
-            while state == 2:
-                data = input(str(vars()["newadd" + str(datachose)] + "/" + "matrix:"))
-                #matrix for preservation
-                master_mat = cript_mat
-                #matrix for editing
-                edit_mat = cript_mat
-                if data == "back":
-                    state = 1
-                if data == "main":
-                      state = 0
-
-                #reset matrix to original state
-                if data == "undoall":
-                    edit_mat = master_mat
-                    print(edit_mat)
-        else:
-            continue
+        while state == 2:
+            data = input(str(vars()["newadd" + str(datachose)] + "/" + "matrix:"))
+            #matrix for preservation
+            master_mat = cript_mat
+            #matrix for editing
+            edit_mat = cript_mat
+            #matrix for undo
+            temp_mat = cript_mat
+            if data == "back":
+                state = 1
+            if data == "main":
+                    state = 0
+            if data == "undo":
+                edit_mat = temp_mat
+                for var in edit_mat:
+                    print(var)
+            #reset matrix to original state
+            if data == "undoall":
+                edit_mat = master_mat
+                for var in edit_mat:
+                    print(var)
+            else:
+                continue
         #string analysis state
         while state == 3:
             data = input(str(vars()["newadd" + str(datachose)] + "/" + "string:"))
-            if data == "back":
-                 state = 1
-            if data == "main":
-                 state = 0
-            else:
-                continue
-        while state == 4:
-            data = data = input(str(vars()["newadd" + str(datachose)] + "/" + "array:"))
+            master_string = cripto
+            edit_string = cripto
+            temp_string = cripto
             if data == "back":
                 state = 1
             if data == "main":
                 state = 0
+            if data == "undo":
+                edit_string = temp_string
+                print(master_string)
+            if data == "undoall":
+                edit_string = master_string
+                print(master_string)
             else:
                 continue
+        while state == 4:
+            data = data = input(str(vars()["newadd" + str(datachose)] + "/" + "array:"))
+            master_arr = cript_arr
+            edit_arr = cript_arr
+            temp_arr = cript_arr
+            if data == "back":
+                state = 1
+            if data == "main":
+                state = 0
+            if data == "undo":
+                edit_arr = temp_arr
+                print(edit_arr)
+            if data == "undoall":
+                edit_arr = master_arr
+            else:
+                continue
+    else:
+        continue
