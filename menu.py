@@ -1,4 +1,5 @@
 import modules.arraydefiner
+import modules.rotation
 import glob
 
 path = 'c:\\projects\\MCA\\pylib\\'
@@ -53,21 +54,30 @@ while state == 0:
             cript_mat = modules.arraydefiner.matrix_from_text_string(cripto,baa[0],baa[1])
             for var in cript_mat:
                 print(var)
-            state = 2
-        
-            #matrix editing state
-        while state == 2:
-            data = input(str(vars()["newadd" + str(datachose)] + "/" + "matrix:"))
+
             #matrix for preservation
             master_mat = cript_mat
             #matrix for editing
             edit_mat = cript_mat
             #matrix for undo
             temp_mat = cript_mat
+            state = 2
+        
+            #matrix editing state
+        while state == 2:
+            data = input(str(vars()["newadd" + str(datachose)] + "/" + "matrix:"))
+            if data == "help":
+                print("//'back' to go back")
+                print("//'main' to return to main menu")
+                print("//'undo' to return to previous matrix state")
+                print("//'undoall' to return to initial matrix")
+                print("//'rot90' to rotate matrix 90 degrees")
+                print("//'rot180' to rotate matrix 180 degrees")
+                print("//'rot270' to rotate matrix 270 degrees")
             if data == "back":
                 state = 1
             if data == "main":
-                    state = 0
+                state = 0
             if data == "undo":
                 edit_mat = temp_mat
                 for var in edit_mat:
@@ -77,6 +87,38 @@ while state == 0:
                 edit_mat = master_mat
                 for var in edit_mat:
                     print(var)
+
+            if data == "rot90":
+                temp_mat = edit_mat
+                edit_mat = modules.rotation.rot90(edit_mat)
+                for x in edit_mat:
+                    print(x)
+            if data == "rot180":
+                temp_mat = edit_mat
+                edit_mat = modules.rotation.rot90(edit_mat)
+                edit_mat = modules.rotation.rot90(edit_mat)
+                for x in edit_mat:
+                    print(x)
+            if data == "rot270":
+                temp_mat = edit_mat
+                edit_mat = modules.rotation.rot90(edit_mat)
+                edit_mat = modules.rotation.rot90(edit_mat)
+                edit_mat = modules.rotation.rot90(edit_mat)
+                for x in edit_mat:
+                    print(x)
+            if data == "fliph":
+                temp_mat = edit_mat
+                edit_mat = modules.rotation.fliphorizontal(edit_mat)
+                for x in edit_mat:
+                    print(x)
+            if data == "flipv":
+                temp_mat = edit_mat
+                edit_mat = modules.rotation.flipvertical(edit_mat)
+                for x in edit_mat:
+                    print(x)
+            if data == "test":
+                for x in edit_mat:
+                    print(x)
             else:
                 continue
         #string analysis state
