@@ -87,7 +87,19 @@ while state == 0:
                 edit_mat = master_mat
                 for var in edit_mat:
                     print(var)
-
+            if data[0] == 'g' and data[1] == 'r' and data[2] == 'i' and data[3] == 'd':
+                pre_var = data.split('d')
+                pos_var = pre_var[1].split(',')
+                lengthGrid = int(pos_var[0]) + int(pos_var[2])
+                heightGrid = int(pos_var[1]) + int(pos_var[3])
+                if len(edit_mat) >= heightGrid and len(edit_mat[0]) >= lengthGrid:
+                    temp_mat = edit_mat
+                    edit_mat = modules.rotation.matrix_To_Grid(edit_mat,pos_var[0],pos_var[1],pos_var[2],pos_var[3])
+                    for x in edit_mat:
+                        print(x)
+                else:
+                    print("grid would be too large")
+            
             if data == "rot90":
                 temp_mat = edit_mat
                 edit_mat = modules.rotation.rot90(edit_mat)

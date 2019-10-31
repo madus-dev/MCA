@@ -65,3 +65,29 @@ def flipvertical(matrixinput):
         vflip_mat_output[z] = vars()["linef" + str(z)] 
 
     return(vflip_mat_output)
+
+def matrix_To_Grid(matrixinput,x,y,length,height):
+    x = int(x)
+    y = int(y)
+    if x + int(length) > len(matrixinput[0]):
+        print("grid length out of bounds")
+    if y + int(height) > len(matrixinput):
+        print("grid height out of of bounds")
+    else:
+        for i in range(0,int(height)):
+            vars()["gridl" + str(i)] = ['0'] * int(length)
+
+        for i in range(0,int(height)):
+            for num in range(0,int(length)):
+                vars()["gridl" + str(i)][num] = matrixinput[int(y)][x]
+                x += 1
+            x = x - int(length)
+            y += 1
+
+        global grid_output
+        grid_output = ['0'] * int(length)
+        for var in range(0,int(length)):
+            grid_output[var] = vars()["gridl" + str(var)]
+
+        return(grid_output)
+                
